@@ -1,5 +1,8 @@
 import random
 
+#Where gussed letters are appended
+letters_list = list()
+
 def load_word():
     '''
     A function that reads a text file of words and randomly selects one to use as the secret word
@@ -56,7 +59,15 @@ def is_guess_in_word(guess, secret_word):
 
     pass
 
-
+def guess_input():
+    valid = True
+    while valid:
+        guess = input('Guess a letter: ')
+        if len(guess) > 1:
+            print('Only guess one letter a time!')
+        else:
+            letters_list.append(guess)
+            valid = False
 
 
 def spaceman(secret_word):
@@ -69,12 +80,12 @@ def spaceman(secret_word):
 
     #Variables to make readability easier for print text
     line = '~'
-    header = f'''|{line*70}|'''
-    intro = f'''{header}\n| Welcome to Spaceman.\n|\n| In this game you will have up to 7 attempts to guess the secret word\n| Guess one letter at a time per round.\n{header}\n
+    header = f'''|{line*78}|'''
+    intro = f'''{header}\n| Welcome to Spaceman.\n|\n| In this game you will have up to 7 attempts to guess the secret word.\n| Guess one letter at a time per round.\n{header}\n
             '''
     print(intro)
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-    guess = input('Enter a letter: ')
+    guess_input()
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
 
     #TODO: show the guessed word so far
