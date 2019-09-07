@@ -1,7 +1,6 @@
 import random
-
-#Where gussed letters are appended
-letters_list = list()
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+letters_guessed = list()
 
 def load_word():
     '''
@@ -28,8 +27,10 @@ def is_word_guessed(secret_word, letters_guessed):
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
-
-    pass
+    return True
+    for l in secret_word:
+            if l not in letters_guessed:
+                return False
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -59,6 +60,9 @@ def is_guess_in_word(guess, secret_word):
 
     pass
 
+#Loops through the the lists alphabet and letters_guessed and checks if the
+#input is in them in order for the lists to be updated. Also checks if the input
+#given is a alphabetical character.
 def guess_input():
     valid = True
     while valid:
@@ -66,9 +70,15 @@ def guess_input():
         if len(guess) > 1:
             print('Only guess one letter a time!')
         else:
-            letters_list.append(guess)
-            valid = False
-
+            if guess in alphabet or guess in letters_guessed:
+                if guess in letters_guessed:
+                    print('Letter already guessed!')
+                else:
+                    alphabet.remove(guess)
+                    letters_guessed.append(guess)
+                    valid = False
+            else:
+                print('Guess is not a letter!')
 
 def spaceman(secret_word):
     '''
@@ -84,8 +94,10 @@ def spaceman(secret_word):
     intro = f'''{header}\n| Welcome to Spaceman.\n|\n| In this game you will have up to 7 attempts to guess the secret word.\n| Guess one letter at a time per round.\n{header}\n
             '''
     print(intro)
-    #TODO: Ask the player to guess one letter per round and check that it is only one letter
-    guess_input()
+    #
+    while is_word_guessed(secret_word, letters_guessed):
+        guess_input()
+
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
 
     #TODO: show the guessed word so far
@@ -96,4 +108,5 @@ def spaceman(secret_word):
 
 #These function calls that will start the game
 secret_word = load_word()
+secret_length = len(secret_word)
 spaceman(secret_word)
