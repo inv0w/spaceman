@@ -29,8 +29,8 @@ def is_word_guessed(secret_word, letters_guessed):
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
     for i in secret_word:
             if i not in letters_guessed:
-                return False
-    return True
+                return True
+    return False
 
 def get_guessed_word(secret_word, letters_guessed):
     '''
@@ -111,7 +111,7 @@ def spaceman(secret_word):
     print(intro)
     #
     counter = 0
-    while not is_word_guessed(secret_word, letters_guessed) and counter < 7:
+    while is_word_guessed(secret_word, letters_guessed) and counter < 7:
             if counter == 6:
                 print(f'You have {7 - counter} guess left.')
             else:
