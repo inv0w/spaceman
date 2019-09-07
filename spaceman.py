@@ -25,6 +25,7 @@ def is_word_guessed(secret_word, letters_guessed):
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
     # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
+
     pass
 
 def get_guessed_word(secret_word, letters_guessed):
@@ -64,20 +65,21 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
-
-
     #TODO: show the player information about the game according to the project spec
 
+    #Variables to make readability easier for print text
+    line = '~'
+    header = f'''|{line*70}|'''
+    intro = f'''{header}\n| Welcome to Spaceman.\n|\n| In this game you will have up to 7 attempts to guess the secret word\n| Guess one letter at a time per round.\n{header}\n
+            '''
+    print(intro)
     #TODO: Ask the player to guess one letter per round and check that it is only one letter
-
+    guess = input('Enter a letter: ')
     #TODO: Check if the guessed letter is in the secret or not and give the player feedback
 
     #TODO: show the guessed word so far
 
     #TODO: check if the game has been won or lost
-
-
-
 
 
 
