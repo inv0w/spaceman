@@ -50,9 +50,6 @@ def get_guessed_word(secret_word, letters_guessed):
             guessed_word.append(i)
         else:
             guessed_word.append(gap)
-    # for i in guessed_word:
-    #     print(guessed_word[i])
-    print(f' {guessed_word}')
 
 def is_guess_in_word(guess, secret_word):
     '''
@@ -69,6 +66,7 @@ def is_guess_in_word(guess, secret_word):
         print('You guessed a letter!')
     else:
         pass
+
 #Loops through the the lists alphabet and letters_guessed and checks if the
 #input is in them in order for the lists to be updated. Also checks if the input
 #given is a alphabetical character.
@@ -126,13 +124,12 @@ def spaceman(secret_word):
                 print(f'You have {7 - counter} guesses left.')
             guess_input()
             get_guessed_word(secret_word, letters_guessed)
-            print(f' Letters guessed{letters_guessed}')
+            print('Letters Guessed: ' + ', '.join(letters_guessed))
             counter +=1
     print(header)
     if not is_word_guessed(secret_word, letters_guessed):
         print('You Win!')
     else:
-
         print('Sorry you lost. Try again in another game!')
 
     #restart()
