@@ -127,11 +127,10 @@ def spaceman(secret_word):
             #Joins the letters in the list and puts them together with a comma
             print('Letters Guessed: ' + ', '.join(letters_guessed))
             get_guessed_word(secret_word, letters_guessed)
-
             print(header)
             counter +=1
+    #Adds breaks in code to show distinction between lines
     print(f'|\n|\n{header}')
-
     #Checks again if you guess the word after you exit the loop
     if not is_word_guessed(secret_word, letters_guessed):
         print('You Win!')
