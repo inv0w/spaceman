@@ -91,7 +91,7 @@ def guess_input():
 
 #Restarting the game
 #Reference: https://stackoverflow.com/questions/48129942/python-restart-program
-def restart(secret_word):
+def restart():
         choice = input('Would you like to play again? y/n\n')
         if choice == 'y':
                 os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
@@ -135,7 +135,7 @@ def spaceman(secret_word):
     else:
         print('Sorry you lost. Try again in another game!')
 
-    restart(secret_word)
+    restart()
 
 #These function calls that will start the game
 secret_word = load_word()
