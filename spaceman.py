@@ -43,11 +43,16 @@ def get_guessed_word(secret_word, letters_guessed):
     '''
 
     #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
-
-    # for i in secret_word:
-    #     if i in letters_guessed
-
-
+    guessed_word = list()
+    gap = '_'
+    for i in secret_word:
+        if i in letters_guessed:
+            guessed_word.append(i)
+        else:
+            guessed_word.append(gap)
+    # for i in guessed_word:
+    #     print(guessed_word[i])
+    print(f' {guessed_word}')
 
 def is_guess_in_word(guess, secret_word):
     '''
@@ -109,16 +114,26 @@ def spaceman(secret_word):
     intro = f'''{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n
             '''
     print(intro)
-    #
+    #Guess Counter
     counter = 0
+    #This block runs the guess_input function over and over until you are up to
+    #7 guesses or the game is won by guessing all the letters.
     while is_word_guessed(secret_word, letters_guessed) and counter < 7:
+            print(header)
             if counter == 6:
                 print(f'You have {7 - counter} guess left.')
             else:
                 print(f'You have {7 - counter} guesses left.')
             guess_input()
-            is_word_guessed(secret_word,letters_guessed)
+            get_guessed_word(secret_word, letters_guessed)
+            print(f' Letters guessed{letters_guessed}')
             counter +=1
+    print(header)
+    if not is_word_guessed(secret_word, letters_guessed):
+        print('You Win!')
+    else:
+
+        print('Sorry you lost. Try again in another game!')
 
     #restart()
 
