@@ -1,4 +1,6 @@
 import random
+import os
+import sys
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 letters_guessed = list()
 
@@ -26,7 +28,7 @@ def is_word_guessed(secret_word, letters_guessed):
     Returns:
         bool: True only if all the letters of secret_word are in letters_guessed, False otherwise
     '''
-    # TODO: Loop through the letters in the secret_word and check if a letter is not in lettersGuessed
+    #Checks to see if all the letters have been guessed in the word.
     for i in secret_word:
             if i not in letters_guessed:
                 return True
@@ -41,8 +43,8 @@ def get_guessed_word(secret_word, letters_guessed):
     Returns:
         string: letters and underscores.  For letters in the word that the user has guessed correctly, the string should contain the letter at the correct position.  For letters in the word that the user has not yet guessed, shown an _ (underscore) instead.
     '''
-
-    #TODO: Loop through the letters in secret word and build a string that shows the letters that have been guessed correctly so far that are saved in letters_guessed and underscores for the letters that have not been guessed yet
+    #Loops through the secret word and adds the letter guessed if it is in
+    #the secret word, if not it adds an underscore.
     guessed_word = list()
     gap = '_'
     for i in secret_word:
@@ -60,8 +62,6 @@ def is_guess_in_word(guess, secret_word):
     Returns:
         bool: True if the guess is in the secret_word, False otherwise
     '''
-    #TODO: check if the letter guess is in the secret word
-
     if guess in secret_word:
         print('You guessed a letter!')
     else:
@@ -89,16 +89,17 @@ def guess_input():
             else:
                 print('Guess is not a letter!')
 
-# #Restarting the game
-# def restart():
-#         choice = input('Would you like to play again? y/n\n')
-#         if choice == 'y':
-#             secret_word = load_word()
-#             spaceman(secret_word)
-#         elif choice == 'n':
-#             print('Thanks for playing!')
-#         else:
-#             pass
+#Restarting the game
+#Reference: https://stackoverflow.com/questions/48129942/python-restart-program
+def restart(secret_word):
+        choice = input('Would you like to play again? y/n\n')
+        if choice == 'y':
+                os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
+        elif choice == 'n':
+            print('Thanks for playing!')
+            sys.exit(0)
+        else:
+            pass
 
 def spaceman(secret_word):
     '''
@@ -109,7 +110,7 @@ def spaceman(secret_word):
     #Variables to make readability easier for print text
     line = '~'
     header = f'''|{line*78}|'''
-    intro = f'''{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n
+    intro = f'''\n\n{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n
             '''
     print(intro)
     #Guess Counter
@@ -127,16 +128,14 @@ def spaceman(secret_word):
             print('Letters Guessed: ' + ', '.join(letters_guessed))
             counter +=1
     print(header)
+
+    #Checks again if you guess the word after you exit the loop
     if not is_word_guessed(secret_word, letters_guessed):
         print('You Win!')
     else:
         print('Sorry you lost. Try again in another game!')
 
-    #restart()
-
-    #TODO: show the guessed word so far
-
-    #TODO: check if the game has been won or lost
+    restart(secret_word)
 
 #These function calls that will start the game
 secret_word = load_word()
