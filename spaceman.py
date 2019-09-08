@@ -52,6 +52,7 @@ def get_guessed_word(secret_word, letters_guessed):
             guessed_word.append(i)
         else:
             guessed_word.append(gap)
+    print(' '.join(guessed_word))
 
 def is_guess_in_word(guess, secret_word):
     '''
@@ -63,15 +64,15 @@ def is_guess_in_word(guess, secret_word):
         bool: True if the guess is in the secret_word, False otherwise
     '''
     if guess in secret_word:
-        print('You guessed a letter!')
+        print('\nYou guessed a letter!\n')
     else:
-        pass
+        print('\nIncorrect guess.\n')
 
 #Loops through the the lists alphabet and letters_guessed and checks if the
 #input is in them in order for the lists to be updated. Also checks if the input
 #given is a alphabetical character.
 def guess_input():
-    print(secret_word)
+    #print(secret_word)
     valid = True
     while valid:
         guess = input('Guess a letter: ')
@@ -118,22 +119,24 @@ def spaceman(secret_word):
     #This block runs the guess_input function over and over until you are up to
     #7 guesses or the game is won by guessing all the letters.
     while is_word_guessed(secret_word, letters_guessed) and counter < 7:
-            print(header)
             if counter == 6:
                 print(f'You have {7 - counter} guess left.')
             else:
                 print(f'You have {7 - counter} guesses left.')
             guess_input()
-            get_guessed_word(secret_word, letters_guessed)
+            #Joins the letters in the list and puts them together with a comma
             print('Letters Guessed: ' + ', '.join(letters_guessed))
+            get_guessed_word(secret_word, letters_guessed)
+
+            print(header)
             counter +=1
-    print(header)
+    print(f'|\n|\n{header}')
 
     #Checks again if you guess the word after you exit the loop
     if not is_word_guessed(secret_word, letters_guessed):
         print('You Win!')
     else:
-        print('Sorry you lost. Try again in another game!')
+        print(f'Sorry you lost. The word was {secret_word} \nTry again in another game!')
 
     restart()
 
