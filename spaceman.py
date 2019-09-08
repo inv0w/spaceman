@@ -72,7 +72,6 @@ def is_guess_in_word(guess, secret_word):
 #input is in them in order for the lists to be updated. Also checks if the input
 #given is a alphabetical character.
 def guess_input():
-    #print(secret_word)
     valid = True
     while valid:
         guess = input('Guess a letter: ')
