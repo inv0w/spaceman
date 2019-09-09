@@ -74,7 +74,7 @@ def is_guess_in_word(guess, secret_word):
 def guess_input():
     valid = True
     while valid:
-        guess = input('Guess a letter: ')
+        guess = input('Guess a letter: ').lower()
         if len(guess) > 1:
             print('Only guess one letter a time!')
         else:
@@ -94,7 +94,7 @@ def guess_input():
 def restart():
         choice = input('Would you like to play again? y/n\n')
         if choice == 'y':
-                os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
+            os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
         elif choice == 'n':
             print('Thanks for playing!')
             sys.exit(0)
