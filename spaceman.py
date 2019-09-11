@@ -120,8 +120,7 @@ def spaceman(secret_word):
       secret_word (string): the secret word to guess.
     '''
 
-    intro = f'''\n\n{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n
-            '''
+    intro = f'''\n\n{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n|'''
     print(intro)
     #Guess Counter
     #This block runs the guess_input function over and over until you are up to
