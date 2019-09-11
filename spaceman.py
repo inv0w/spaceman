@@ -3,6 +3,16 @@ import os
 import sys
 alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 letters_guessed = list()
+counter = 0
+#Variables to make readability easier for print text
+line = '~'
+header = f'''|{line*78}|'''
+
+#Makes a global counter, had issues with local counters and wanted a fix.
+#Know this kind of practice in the long run isn't the cleanest.
+def increment():
+    global counter
+    counter += 1
 
 def load_word():
     '''
@@ -52,7 +62,7 @@ def get_guessed_word(secret_word, letters_guessed):
             guessed_word.append(i)
         else:
             guessed_word.append(gap)
-    print(' '.join(guessed_word))
+    print('| ' + ' '.join(guessed_word) + '\n|')
 
 def is_guess_in_word(guess, secret_word):
     '''
@@ -64,9 +74,10 @@ def is_guess_in_word(guess, secret_word):
         bool: True if the guess is in the secret_word, False otherwise
     '''
     if guess in secret_word:
-        print('\nYou guessed a letter!\n')
+        print('| You guessed a letter!')
     else:
-        print('\nIncorrect guess.\n')
+        print('| Incorrect guess.')
+        increment()
 
 #Loops through the the lists alphabet and letters_guessed and checks if the
 #input is in them in order for the lists to be updated. Also checks if the input
@@ -74,29 +85,30 @@ def is_guess_in_word(guess, secret_word):
 def guess_input():
     valid = True
     while valid:
-        guess = input('Guess a letter: ').lower()
+        guess = input('| Guess a letter: ').lower()
+        print(header)
         if len(guess) > 1:
-            print('Only guess one letter a time!')
+            print('| Only guess one letter a time!')
         else:
             if guess in alphabet or guess in letters_guessed:
                 if guess in letters_guessed:
-                    print('Letter already guessed!')
+                    print('| Letter already guessed!')
                 else:
                     alphabet.remove(guess)
                     letters_guessed.append(guess)
                     valid = False
                     is_guess_in_word(guess, secret_word)
             else:
-                print('Guess is not a letter!')
+                print('| Guess is not a letter!')
 
 #Restarting the game
 #Reference: https://stackoverflow.com/questions/48129942/python-restart-program
 def restart():
-        choice = input('Would you like to play again? y/n\n')
+        choice = input('| Would you like to play again? y/n\n| ')
         if choice == 'y':
             os.execl(sys.executable, os.path.abspath(__file__), *sys.argv)
         elif choice == 'n':
-            print('Thanks for playing!')
+            print('| Thanks for playing!')
             sys.exit(0)
         else:
             pass
@@ -107,34 +119,30 @@ def spaceman(secret_word):
     Args:
       secret_word (string): the secret word to guess.
     '''
-    #Variables to make readability easier for print text
-    line = '~'
-    header = f'''|{line*78}|'''
+
     intro = f'''\n\n{header}\n| Welcome to Spaceman.\n|\n| You will have up to 7 attempts to guess letters in the secret word.\n| Guess one letter at a time per round.\n|\n| The word to guess contains {len(secret_word)} letters.\n{header}\n
             '''
     print(intro)
     #Guess Counter
-    counter = 0
     #This block runs the guess_input function over and over until you are up to
     #7 guesses or the game is won by guessing all the letters.
     while is_word_guessed(secret_word, letters_guessed) and counter < 7:
             if counter == 6:
-                print(f'You have {7 - counter} guess left.')
+                print(f'| You have 1 guess left.')
             else:
-                print(f'You have {7 - counter} guesses left.')
+                print(f'| You have {7 - counter} guesses left.')
             guess_input()
+
             #Joins the letters in the list and puts them together with a comma
-            print('Letters Guessed: ' + ', '.join(letters_guessed))
+            print('| Letters Guessed: ' + ', '.join(letters_guessed))
             get_guessed_word(secret_word, letters_guessed)
-            print(header)
-            counter +=1
     #Adds breaks in code to show distinction between lines
-    print(f'|\n|\n{header}')
+    print(f'{header}\n|\n|\n{header}')
     #Checks again if you guess the word after you exit the loop
     if not is_word_guessed(secret_word, letters_guessed):
-        print('You Win!')
+        print('| You Win!')
     else:
-        print(f'Sorry you lost. The word was {secret_word} \nTry again in another game!')
+        print(f'| Sorry you lost. The word was {secret_word} \n| Try again in another game!')
 
     restart()
 
