@@ -149,7 +149,14 @@ def spaceman(secret_word):
 
     restart()
 
-'''Test Functions'''
+'''
+    Test Functions
+
+    When running the tests by themselves it passes, however when the
+    spaceman function is enabled it gives an error. All the tests run fine
+    with the spaceman function commented out.
+
+'''
 
 def test_is_word_guessed():
     #Logic is Reversed, this doesn't give an error.
@@ -169,11 +176,12 @@ def test_is_guess_in_word():
     assert is_guess_in_word(('c'), ('space')) is True
 
 
-#Test Functions
+#Tests the Functions
 test_is_word_guessed()
 test_get_guessed_word()
 test_is_guess_in_word()
 
+
 #These function calls that will start the game
-#secret_word = load_word()
-#spaceman(secret_word)
+secret_word = load_word()
+spaceman(secret_word)
