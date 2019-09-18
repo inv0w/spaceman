@@ -63,6 +63,7 @@ def get_guessed_word(secret_word, letters_guessed):
         else:
             guessed_word.append(gap)
     print('| ' + ' '.join(guessed_word) + '\n|')
+    return guessed_word
 
 def is_guess_in_word(guess, secret_word):
     '''
@@ -75,9 +76,11 @@ def is_guess_in_word(guess, secret_word):
     '''
     if guess in secret_word:
         print('| You guessed a letter!')
+        return True
     else:
         print('| Incorrect guess.')
         increment()
+        return False
 
 #Loops through the the lists alphabet and letters_guessed and checks if the
 #input is in them in order for the lists to be updated. Also checks if the input
@@ -98,6 +101,7 @@ def guess_input():
                     letters_guessed.append(guess)
                     valid = False
                     is_guess_in_word(guess, secret_word)
+                    return True
             else:
                 print('| Guess is not a letter!')
 
@@ -145,6 +149,31 @@ def spaceman(secret_word):
 
     restart()
 
+'''Test Functions'''
+
+def test_is_word_guessed():
+    #Logic is Reversed, this doesn't give an error.
+    assert is_word_guessed(('ghost'),['g', 'h', 'o', 's', 't']) is False
+    assert is_word_guessed(('toast'),['a', 'h', 'o', 's', 't']) is False
+    assert is_word_guessed(('battle'),['a', 'b', 'o', 's', 't', 'l', 'e']) is False
+
+
+def test_get_guessed_word():
+     assert get_guessed_word(('basket'),['b', 's', 'k', 'e']) == ['b', '_', 's', 'k', 'e', '_']
+     assert get_guessed_word(('broccoli'),['b', 't', 'o', 'e', 'c', 'i']) == ['b', '_', 'o', 'c', 'c', 'o', '_', 'i']
+     assert get_guessed_word(('child'),['c', 'i', 'l', 'e', 'o']) == ['c', '_', 'i', 'l', '_']
+
+def test_is_guess_in_word():
+    assert is_guess_in_word(('b'), ('basket')) is True
+    assert is_guess_in_word(('t'), ('trampoline')) is True
+    assert is_guess_in_word(('c'), ('space')) is True
+
+
+#Test Functions
+test_is_word_guessed()
+test_get_guessed_word()
+test_is_guess_in_word()
+
 #These function calls that will start the game
-secret_word = load_word()
-spaceman(secret_word)
+#secret_word = load_word()
+#spaceman(secret_word)
