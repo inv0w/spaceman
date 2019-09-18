@@ -175,13 +175,7 @@ def test_is_guess_in_word():
     assert is_guess_in_word(('t'), ('trampoline')) is True
     assert is_guess_in_word(('c'), ('space')) is True
 
-
-#Tests the Functions
-test_is_word_guessed()
-test_get_guessed_word()
-test_is_guess_in_word()
-
-
-#These function calls that will start the game
-secret_word = load_word()
-spaceman(secret_word)
+if __name__ == "__main__":
+    #These function calls that will start the game
+    secret_word = load_word()
+    spaceman(secret_word)
